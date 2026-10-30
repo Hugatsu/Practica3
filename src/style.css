@@ -1,0 +1,308 @@
+:root {
+  --sea-deep: #0b1d2e;
+  --sea: #13314a;
+  --foam: #e8edf2;
+  --parchment: #f1e2bd;
+  --parchment-dark: #d9c08a;
+  --ink: #3a2414;
+  --ink-soft: #6b4a2f;
+  --red: #b3261e;
+  --gold: #e3b341;
+  --green: #2d6a4f;
+  --grey: #6c757d;
+
+  --font-title: 'Pirata One', 'Georgia', serif;
+  --font-poster: 'Special Elite', 'Courier New', monospace;
+  --font-body: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 0 1rem 3rem;
+  font-family: var(--font-body);
+  color: var(--foam);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(227, 179, 65, 0.12), transparent 40%),
+    linear-gradient(180deg, var(--sea) 0%, var(--sea-deep) 60%);
+  background-attachment: fixed;
+}
+
+/* ---------- Cabecera ---------- */
+
+.cabecera {
+  padding: 3rem 1rem 2rem;
+  text-align: center;
+}
+
+.cabecera h1 {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.cabecera p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ---------- Buscador y filtro (paso 10) ---------- */
+
+.controles fieldset {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto 2rem;
+  padding: 1.5rem;
+  background: rgba(11, 29, 46, 0.6);
+  border: 2px solid var(--parchment-dark);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.controles input,
+.controles select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--parchment);
+  border: 2px solid var(--parchment-dark);
+  border-radius: 6px;
+}
+
+/* Buscador principal: ocupa todo el ancho y es más grande */
+.controles .controles__busqueda {
+  padding: 0.9rem 1.1rem;
+  font-family: var(--font-poster);
+  font-size: 1.25rem;
+}
+
+/* Desplegables en rejilla: se recolocan solos según el ancho de pantalla */
+.controles__filtros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.filtro {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.filtro__nombre {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.boton--secundario {
+  justify-self: center;
+  color: var(--gold);
+  background: transparent;
+  border: 2px solid var(--gold);
+}
+
+.controles fieldset:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.controles input:focus-visible,
+.controles select:focus-visible,
+.boton:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---------- Resumen ---------- */
+
+.resumen {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+/* ---------- Estados: carga, error, vacío ---------- */
+
+.estado {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: var(--font-poster);
+  text-align: center;
+  color: var(--ink);
+  background: var(--parchment);
+  border-radius: 8px;
+}
+
+.estado p {
+  margin: 0 0 0.75rem;
+}
+
+.estado--error {
+  color: var(--red);
+}
+
+.boton {
+  padding: 0.6rem 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--parchment);
+  background: var(--red);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  filter: brightness(1.1);
+}
+
+/* ---------- Rejilla de carteles ---------- */
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---------- Cartel "SE BUSCA" ---------- */
+
+.cartel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem 1rem 1.25rem;
+  font-family: var(--font-poster);
+  text-align: center;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35), transparent 60%),
+    var(--parchment);
+  border: 1px solid var(--parchment-dark);
+  box-shadow:
+    inset 0 0 30px rgba(107, 74, 47, 0.35),
+    0 10px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.cartel:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.cartel:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.cartel:hover {
+  transform: rotate(0) scale(1.03);
+}
+
+.cartel__titulo {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 2.4rem;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Retrato con iniciales (la API no trae fotos) */
+.cartel__retrato {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  font-family: var(--font-title);
+  font-size: 4rem;
+  color: var(--ink-soft);
+  background: var(--parchment-dark);
+  border: 3px solid var(--ink);
+}
+
+.cartel__nombre {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.cartel__recompensa {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.cartel__estado {
+  padding: 0.1rem 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--parchment);
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.cartel__estado--vivo { background: var(--green); }
+.cartel__estado--fallecido { background: var(--red); }
+.cartel__estado--desconocido { background: var(--grey); }
+
+.cartel__datos {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  list-style: none;
+}
+
+/* Sello rojo sobre el retrato de los fallecidos.
+   :has() selecciona el cartel que CONTIENE la etiqueta de fallecido */
+.cartel:has(.cartel__estado--fallecido)::after {
+  content: 'Fallecido';
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 3px solid var(--red);
+  border-radius: 4px;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  opacity: 0.85;
+}
+
+.cartel:has(.cartel__estado--fallecido) .cartel__retrato {
+  filter: grayscale(1) brightness(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartel {
+    transition: none;
+  }
+}
