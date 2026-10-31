@@ -1,26 +1,34 @@
 import { useState } from "react";
 import Cabecera from "./components/Cabecera";
 import Rejilla from "./components/Rejilla";
-import Buscador from "./components/Buscador";
+import Filtros from "./components/Filtros";
 import { CARTELES_PRUEBA } from "./datosDePrueba";
-import { recompensaTotal, formatearBerries } from "./transform";
+import { aplicarFiltros, ordenarCarteles, valoresUnicos, recompensaTotal, formatearBerries } from "./transform";
+
+const FILTROS_INICIALES = {nombre: "", tripulacion: "", estado: "todos", recompensa: "con", fruta: "todos", orden: "recompensa"};
 
 export default function App() {
-  const [busqueda, setBusqueda] = useState("");
+  const [filtros, setFiltros] = useState(FILTROS_INICIALES);
 
-  const texto = busqueda.trim().toLowerCase();
-  const visibles = CARTELES_PRUEBA.filter((c) => c.nombre.toLowerCase().includes(texto));
+  function cambiarFiltro(campo, valor){
+    setFiltros((anteriores) => ({...anteriores, [campo]: valor}));
+  }
+
+  const tripulaciones = valoresUnicos(CARTELES_PRUEBA, "tripulacion");
+  const tiposFruta = valoresUnicos(CARTELES_PRUEBA, "tipoFruta")
+  const visibles = ordenarCarteles(aplicarFiltros(CARTELES_PRUEBA, filtros), filtros.orden)
   const resumen = `${visibles.length} personajes ///// Recompensa de: ${formatearBerries(recompensaTotal(visibles))}`;
 
   return (
     <>
       <Cabecera />
-
-      <form className="controles" onSubmit={(evento) => evento.preventDefault()}>
-        <fieldset>
-          <Buscador valor = {busqueda} valorAlCambiar={setBusqueda}/>
-        </fieldset>
-      </form>
+      <Filtros
+        filtros={filtros}
+        valorAlCambiar={cambiarFiltro}
+        valorAlLimpiar={() => setFiltros(FILTROS_INICIALES)}
+        tripulaciones={tripulaciones}
+        tiposFruta={tiposFruta}
+      />
 
       <main>
         <p className="resumen">{resumen}</p>
