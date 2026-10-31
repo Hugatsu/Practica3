@@ -1,3 +1,14 @@
+import Cabecera from "./components/Cabecera";
+
 export default function App() {
-  return <h1>Se busca</h1>;
+  return (
+    <>
+      <Cabecera />
+      <main>
+        <p className="estado">
+          Carteles
+        </p>
+      </main>
+    </>
+  );
 }
