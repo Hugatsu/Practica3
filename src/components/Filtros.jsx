@@ -1,10 +1,10 @@
 import Buscador from "./Buscador";
 import Selector from "./Selector";
 
-export default function Filtros({filtros, valorAlCambiar, valorAlLimpiar, tripulaciones, tiposFruta}){
+export default function Filtros({filtros, valorAlCambiar, valorAlLimpiar, tripulaciones, tiposFruta, desactivado}){
     return(
         <form className="controles" onSubmit={(evento) => evento.preventDefault()}>
-            <fieldset>
+            <fieldset disabled={desactivado}>
                 <Buscador valor = {filtros.nombre} valorAlCambiar = {(valor) => valorAlCambiar("nombre", valor)}/>
 
                 <div className="controles__filtros">
