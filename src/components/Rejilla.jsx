@@ -4,7 +4,7 @@ export default function Rejilla({carteles}){
     return(
         <section className="rejilla">
             {carteles.map((c) => (
-                <Cartel key={Cartel.id} cartel={c}/>
+                <Cartel key={c.id} cartel={c}/>
             ))}
         </section>
     );

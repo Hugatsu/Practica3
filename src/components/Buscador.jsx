@@ -2,7 +2,7 @@ export default function Buscador({valor, valorAlCambiar}){
     return(
         <input
             type="search"
-            className="controles_busqueda"
+            className="controles__busqueda"
             placeholder="Buscar personaje..."
             aria-label="Buscar personaje"
             autoComplete="on"

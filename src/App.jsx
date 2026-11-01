@@ -12,7 +12,7 @@ export default function App() {
 
   const [carteles, setCarteles] = useState(null);
   const [error, setError] = useState(null);
-  const [intento, setIntento] = useState(null);
+  const [intento, setIntento] = useState(0);
   const [filtros, setFiltros] = useState(FILTROS_INICIALES);
 
   // EFECTO: pedir los piratas a la API al empezar y en cada reintento
@@ -22,6 +22,7 @@ export default function App() {
     async function cargar() {
       try {
         const personajes = await obtenerPersonajes(controlador.signal);
+        if(controlador.signal.aborted) return;
         setCarteles(prepararCarteles(personajes));
       } catch (e) {
         if (!controlador.signal.aborted) setError(e.message);
